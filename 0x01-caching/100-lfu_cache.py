@@ -6,6 +6,8 @@ from collections import defaultdict
 
 
 class LFUCache(BaseCaching):
+    """LFUCache class"""
+
     def __init__(self):
         """__init__ function"""
         super().__init__()

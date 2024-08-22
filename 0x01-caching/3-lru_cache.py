@@ -5,6 +5,8 @@ from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
+    """LRUCache class"""
+
     def __init__(self):
         """__init__ function"""
         super().__init__()
