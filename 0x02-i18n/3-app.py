@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Parametrize templates"""
+"""Basic Flask app"""
 
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
@@ -7,7 +7,7 @@ from typing import Any
 
 
 class Config:
-    """Configuration class"""
+    """Config class"""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -20,13 +20,16 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale() -> str:
-    """Get locale from request"""
+    """Select language"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+_ = _ if _ else lambda x: x
 
 
 @app.route('/', strict_slashes=False)
 def index() -> str:
-    """Basic route"""
+    """Home page"""
     return render_template('3-index.html')
 
 

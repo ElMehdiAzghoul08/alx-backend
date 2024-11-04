@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Force locale with URL parameter"""
+"""Basic Flask app"""
 
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
-from typing import Any, Union
+from typing import Any
 
 
 class Config:
-    """Configuration class"""
+    """Config class"""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -20,16 +20,19 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale() -> str:
-    """Get locale from request"""
+    """Select language"""
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+_ = _ if _ else lambda x: x
+
+
 @app.route('/', strict_slashes=False)
 def index() -> str:
-    """Basic route"""
+    """Home page"""
     return render_template('4-index.html')
 
 
